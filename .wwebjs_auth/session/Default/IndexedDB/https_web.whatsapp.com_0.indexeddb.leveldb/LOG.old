@@ -1,0 +1,5 @@
+2022/03/29-16:58:07.045 c70 Creating DB D:\WEB\api-wa-v2\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb since it was missing.
+2022/03/29-16:58:07.387 c70 Reusing MANIFEST D:\WEB\api-wa-v2\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/03/29-16:58:39.760 3c60 Level-0 table #5: started
+2022/03/29-16:58:39.902 3c60 Level-0 table #5: 1241845 bytes OK
+2022/03/29-16:58:39.933 3c60 Delete type=0 #3
