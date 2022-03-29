@@ -11,7 +11,7 @@ const socketIO = require("socket.io");
 const http = require("http");
 const server = http.createServer(app);
 const io = socketIO(server);
-
+const port = process.env.PORT || 8000
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
@@ -101,6 +101,6 @@ app.post('/send-message', (req, res) => {
 
 });
 
-server.listen(8000, function () {
+server.listen(port, function () {
     console.log("App running ... ");
 });
