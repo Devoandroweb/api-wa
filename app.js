@@ -1,107 +1,109 @@
 const {
-    Client, LocalAuth, LegacySessionAuth
+    Client,
+    LocalAuth
 } = require('whatsapp-web.js');
-var favicon = require('serve-favicon');
-var path = require('path');
-const qrcode = require('qrcode');
-const fs = require('fs');
+const qrcode = require('qrcode-terminal');
 const express = require("express");
-const app = express();
 const socketIO = require("socket.io");
+const app = express();
+
 const http = require("http");
+const {
+    response
+} = require('express');
+
+const port = process.env.PORT || 8000;
 const server = http.createServer(app);
+
 const io = socketIO(server);
-const port = process.env.PORT || 8000
+
+
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
 
-const SESSION_FILE_PATH = './session.json';
-let sessionCfg;
-if (fs.existsSync(SESSION_FILE_PATH)) {
-    sessionCfg = require(SESSION_FILE_PATH);
-}
 const client = new Client({
+    authStrategy: new LocalAuth(),
     puppeteer: {
         headless: true,
-        args: ['--no-sandbox']
-    },
-    authStrategy: new LegacySessionAuth(),
-    session: sessionCfg
-});
-
-
-app.get("/", (req, res) => {
-    res.sendFile("index.html", {
-        root: __dirname
-    });
-});
-app.use(favicon(path.join(__dirname, '/', 'favicon.ico')))
-client.on('message', msg => {
-    if (msg.body == 'mas') {
-        msg.reply('sedang sibuk mohon tunggu ... *[Bot Whatsapp by Rossi]*');
     }
 });
+var auth = false;
+client.on('qr', (qr) => {
+    console.log('QR RECEIVED', qr);
+    qrcode.generate(qr, {
+        small: true
+    });
+});
+
+client.on('ready', () => {
+    console.log('Client is ready!');
+});
+
+client.on('message', message => {
+    if (
+        message.body === "Assalamu'alaikum" || 
+        message.body === "Assalamualaikum" || 
+        message.body === "Mas" || 
+        message.body === "mas" ||
+        message.body === "Den" ||
+        message.body === "den"
+        ) {
+            if (message.body == "Mas" || message.body == "mas" || message.body === "den" || message.body === "Den") {
+                message.reply('Iya, mohon ditunggu saya akan segera membalas');
+            }else{
+                message.reply('*Waalaikumsalam*, mohon ditunggu saya akan segera membalas');
+            }
+        //client.sendMessage("62895804190103@c.us", "Hallo");
+    }
+});
+
+// API
+app.get('/send-message', (req, res) => {
+    const checkRegistered = async function (number) {
+        const isRegistered = await client.isRegisteredUser(number)
+        return isRegistered;
+    }
+
+
+    var number = req.query.number;
+    var message = req.query.msg;
+    message = message.split('{ENTER}').join('%0a');
+    // var number = "62895804190103@c.us";
+    // var message = "Tes Api Wa";
+    //Tes %0a Api Wa %0a = break
+    const isRegisteredNumber = checkRegistered(number)
+
+    if (!isRegisteredNumber) {
+        return res.status(422).json({
+            status: false,
+            message: "Nomor tidak terdaftar"
+        })
+    }
+    client.sendMessage(number, message).then(response => {
+        res.status(200).json({
+            status: true,
+            response: response
+        })
+    }).catch(err => {
+        res.status(500).json({
+            status: false,
+            response: err
+        })
+    });
+});
+
+
 
 client.initialize();
-process.setMaxListeners(0);
-io.on('connection', function (socket) {
-    socket.emit('message', 'Connecting ... ');
-    if (sessionCfg) {
-        // console.log('Session', sessionCfg);
-        socket.emit('message', 'Ready ');
-
-    }
-    client.on('qr', (qr) => {
-        // Generate and scan this code with your phone
-        console.log('QR RECEIVED', qr);
-        qrcode.toDataURL(qr, (err, url) => {
-            socket.emit('qr', url);
-            socket.emit('message', 'QR Code accepted ... ');
-        });
-    });
-
-    client.on('ready', () => {
-        socket.emit('ready', 'Whatsapp is ready!');
-        socket.emit('message', 'Whatsapp is ready!');
-    });
-
-    client.on('authenticated', (session) => {
-        socket.emit('ready', 'Whatsapp is authenticated!');
-        socket.emit('message', 'Whatsapp is authenticated!');
-        console.log('AUTHENTICATED', session);
-        sessionCfg = session;
-        fs.writeFile(SESSION_FILE_PATH, JSON.stringify(session), function (err) {
-            if (err) {
-                console.error(err);
-            } else {
-                socket.emit('ready', 'Whatsapp is ready!');
-            }
-        });
-    });
-});
-
-//API WA
-app.post('/send-message', (req, res) => {
-    const number = req.body.number;
-    const message = req.body.message;
-    for (var i = 0; i < 3; i++) {
-        client.sendMessage(number, message).then(response => {
-            res.status(200).json({
-                status: true,
-                response: response
-            });
-        }).catch(err => {
-            res.status(500).json({
-                status: false,
-                response: err
-            });
-        });
-    };
-
-});
-
 server.listen(port, function () {
     console.log("App running ... ");
 });
+
+//SCOKET
+io.on('connection', onConnect);
+
+function onConnect(socket) {
+    console.log('Connected');
+}
