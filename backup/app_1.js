@@ -3,18 +3,18 @@ const {
 } = require('whatsapp-web.js');
 var favicon = require('serve-favicon');
 var path = require('path');
-const qrcode = require('qrcode');
 const fs = require('fs');
+const qrcode = require('qrcode');
 const express = require("express");
 const app = express();
 const socketIO = require("socket.io");
 const http = require("http");
 const server = http.createServer(app);
 const io = socketIO(server);
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8888
 app.use(express.json());
 app.use(express.urlencoded({
-    extended: true
+    extended: false
 }));
 
 const SESSION_FILE_PATH = './session.json';

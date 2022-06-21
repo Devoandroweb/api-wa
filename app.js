@@ -1,21 +1,23 @@
+//inisisalisai variable
 const {
     Client,
     LocalAuth
 } = require('whatsapp-web.js');
-const qrcode = require('qrcode-terminal');
+const qrcode_terminal = require('qrcode-terminal');
+const qrcode = require('qrcode');
 const express = require("express");
 const socketIO = require("socket.io");
 const app = express();
-
 const http = require("http");
-const {
-    response
-} = require('express');
-
+const {response} = require('express');
 const port = process.env.PORT || 8000;
 const server = http.createServer(app);
-
 const io = socketIO(server);
+const fs = require('fs');
+var favicon = require('serve-favicon');
+var path = require('path');
+
+
 
 
 app.use(express.json());
@@ -25,14 +27,11 @@ app.use(express.urlencoded({
 
 const client = new Client({
     authStrategy: new LocalAuth(),
-    puppeteer: {
-        headless: true,
-    }
 });
-var auth = false;
+
 client.on('qr', (qr) => {
     console.log('QR RECEIVED', qr);
-    qrcode.generate(qr, {
+    qrcode_terminal.generate(qr, {
         small: true
     });
 });
@@ -59,7 +58,32 @@ client.on('message', message => {
     }
 });
 
-// API
+
+var rimraf = require("rimraf");
+rimraf(".wwebjs_auth", function () {
+    console.log("done");
+});
+
+client.on('disconnected', (reason) => {
+    // Destroy and reinitialize the client when disconnected
+    
+    rimraf(".wwebjs_auth", function () {
+        console.log("done");
+    });
+
+    client.destroy();
+    client.initialize();
+});
+
+//HTML -------------------------------------------------------------------------------------
+app.get("/", (req, res) => {
+    res.sendFile("index.html", {
+        root: __dirname
+    });
+});
+app.use(favicon(path.join(__dirname, '/', 'favicon.ico')))
+// -----------------------------------------------------------------------------------------
+// API -------------------------------------------------------------------------------------
 app.get('/send-message', (req, res) => {
     const checkRegistered = async function (number) {
         const isRegistered = await client.isRegisteredUser(number)
@@ -93,17 +117,44 @@ app.get('/send-message', (req, res) => {
         })
     });
 });
+// -----------------------------------------------------------------------------------------
+// IO --------------------------------------------------------------------------------------
+io.on('connection', function (socket) {
+    socket.emit('message', 'Connecting...');
 
+    client.on('qr', (qr) => {
+        console.log('QR RECEIVED', qr);
+        qrcode.toDataURL(qr, (err, url) => {
+            socket.emit('qr', url);
+            socket.emit('message', 'QR Code received, scan please!');
+        });
+    });
 
+    client.on('ready', () => {
+        socket.emit('ready', 'Whatsapp is ready!');
+        socket.emit('message', 'Whatsapp is ready!');
+    });
 
-client.initialize();
+    client.on('authenticated', () => {
+        socket.emit('authenticated', 'Whatsapp is authenticated!');
+        socket.emit('message', 'Whatsapp is authenticated!');
+        console.log('AUTHENTICATED');
+    });
+
+    client.on('auth_failure', function (session) {
+        socket.emit('message', 'Auth failure, restarting...');
+    });
+
+    client.on('disconnected', (reason) => {
+        socket.emit('message', 'Whatsapp is disconnected!');
+        client.destroy();
+        client.initialize();
+    });
+});
+// ------------------------------------------------------------------------------------------
+
+process.setMaxListeners(0);
 server.listen(port, function () {
+    client.initialize();
     console.log("App running ... ");
 });
-
-//SCOKET
-io.on('connection', onConnect);
-
-function onConnect(socket) {
-    console.log('Connected');
-}
