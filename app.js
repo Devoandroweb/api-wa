@@ -26,7 +26,8 @@ app.use(express.urlencoded({
 }));
 
 const client = new Client({
-     puppeteer: {
+    restartOnAuthFail: true,
+    puppeteer: {
          headless: true,
          args: [
              '--no-sandbox',
@@ -131,9 +132,10 @@ app.get('/send-message', (req, res) => {
     });
 });
 // -----------------------------------------------------------------------------------------
+client.initialize();
 // IO --------------------------------------------------------------------------------------
 io.on('connection', function (socket) {
-    // socket.emit('message', 'Connecting...');
+    socket.emit('message', 'Connecting...');
 
     client.on('qr', (qr) => {
         console.log('QR RECEIVED', qr);
