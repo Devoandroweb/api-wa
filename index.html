@@ -132,7 +132,8 @@
     <script>
         $(document).ready(function () {
             
-            var socket = io("http://localhost:8000/",{path:'/socket.io'});
+            // var socket = io("http://localhost:8000/",{path:'/socket.io'});
+            var socket = io();
             socket.on("message", function (msg) {
                 console.log(msg);
                 $(".log").text(msg);
