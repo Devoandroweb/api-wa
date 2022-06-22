@@ -133,10 +133,14 @@ app.get('/send-message', (req, res) => {
 });
 // -----------------------------------------------------------------------------------------
 client.initialize();
+var login = false;
 // IO --------------------------------------------------------------------------------------
 io.on('connection', function (socket) {
-    socket.emit('message', 'Connecting...');
 
+    socket.emit('message', 'Connecting...');
+    if(login){
+        socket.emit('message', 'Whatsapp is ready!');
+    }
     client.on('qr', (qr) => {
         console.log('QR RECEIVED', qr);
         qrcode.toDataURL(qr, (err, url) => {
@@ -146,6 +150,7 @@ io.on('connection', function (socket) {
     });
 
     client.on('ready', () => {
+        login = true;
         socket.emit('ready', 'Whatsapp is ready!');
         socket.emit('message', 'Whatsapp is ready!');
     });
