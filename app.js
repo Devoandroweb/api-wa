@@ -166,6 +166,7 @@ io.on('connection', function (socket) {
     });
 
     client.on('disconnected', (reason) => {
+        login = false;
         socket.emit('message', 'Whatsapp is disconnected!');
         client.destroy();
         client.initialize();
