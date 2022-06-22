@@ -26,6 +26,19 @@ app.use(express.urlencoded({
 }));
 
 const client = new Client({
+     puppeteer: {
+         headless: true,
+         args: [
+             '--no-sandbox',
+             '--disable-setuid-sandbox',
+             '--disable-dev-shm-usage',
+             '--disable-accelerated-2d-canvas',
+             '--no-first-run',
+             '--no-zygote',
+             '--single-process', // <- this one doesn't works in Windows
+             '--disable-gpu'
+         ],
+     },
     authStrategy: new LocalAuth(),
 });
 
@@ -120,7 +133,7 @@ app.get('/send-message', (req, res) => {
 // -----------------------------------------------------------------------------------------
 // IO --------------------------------------------------------------------------------------
 io.on('connection', function (socket) {
-    socket.emit('message', 'Connecting...');
+    // socket.emit('message', 'Connecting...');
 
     client.on('qr', (qr) => {
         console.log('QR RECEIVED', qr);
