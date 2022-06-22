@@ -17,7 +17,7 @@ const fs = require('fs');
 var favicon = require('serve-favicon');
 var path = require('path');
 
-
+var login = false;
 
 
 app.use(express.json());
@@ -45,12 +45,14 @@ const client = new Client({
 
 client.on('qr', (qr) => {
     console.log('QR RECEIVED', qr);
-    qrcode_terminal.generate(qr, {
-        small: true
-    });
+    // qrcode_terminal.generate(qr, {
+    //     small: true
+    // });
 });
 
 client.on('ready', () => {
+    login = true;
+    console.log("Status Auth :  "+login);
     console.log('Client is ready!');
 });
 
@@ -84,7 +86,8 @@ client.on('disconnected', (reason) => {
     rimraf(".wwebjs_auth", function () {
         console.log("done");
     });
-
+    login = false;
+    console.log("Status Auth :  "+login);
     client.destroy();
     client.initialize();
 });
@@ -132,25 +135,27 @@ app.get('/send-message', (req, res) => {
     });
 });
 // -----------------------------------------------------------------------------------------
-client.initialize();
-var login = false;
+
 // IO --------------------------------------------------------------------------------------
 io.on('connection', function (socket) {
 
     socket.emit('message', 'Connecting...');
     if(login){
         socket.emit('message', 'Whatsapp is ready!');
-    }
-    client.on('qr', (qr) => {
-        console.log('QR RECEIVED', qr);
-        qrcode.toDataURL(qr, (err, url) => {
-            socket.emit('qr', url);
-            socket.emit('message', 'QR Code received, scan please!');
+    }else{
+        client.on('qr', (qr) => {
+            console.log('QR RECEIVED', qr);
+            qrcode.toDataURL(qr, (err, url) => {
+                socket.emit('qr', url);
+                socket.emit('message', 'QR Code received, scan please!');
+            });
         });
-    });
+    }
+    
 
     client.on('ready', () => {
         login = true;
+        console.log("Status Auth :  "+login);
         socket.emit('ready', 'Whatsapp is ready!');
         socket.emit('message', 'Whatsapp is ready!');
     });
@@ -167,8 +172,16 @@ io.on('connection', function (socket) {
 
     client.on('disconnected', (reason) => {
         login = false;
+        console.log("Status Auth :  " + login);
         socket.emit('message', 'Whatsapp is disconnected!');
         client.destroy();
+        client.on('qr', (qr) => {
+            console.log('QR RECEIVED', qr);
+            qrcode.toDataURL(qr, (err, url) => {
+                socket.emit('qr', url);
+                socket.emit('message', 'QR Code received, scan please!');
+            });
+        });
         client.initialize();
     });
 });

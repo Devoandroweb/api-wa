@@ -1,1 +1,68 @@
-[0622/113600.383:ERROR:dxva_video_decode_accelerator_win.cc(1427)] DXVAVDA fatal error: Could not load mf.dll: The specified module could not be found. (0x7E)
+[0622/161919.836:ERROR:dxva_video_decode_accelerator_win.cc(1427)] DXVAVDA fatal error: Could not load mf.dll: The specified module could not be found. (0x7E)
+[0622/162002.504:INFO:CONSOLE(1)] "Uncaught (in promise) TypeError: Failed to execute 'put' on 'Cache': Partial response (status code 206) is unsupported", source: https://web.whatsapp.com/serviceworker.js (1)
+[0622/162002.582:INFO:CONSOLE(1)] "Uncaught (in promise) TypeError: Failed to execute 'put' on 'Cache': Partial response (status code 206) is unsupported", source: https://web.whatsapp.com/serviceworker.js (1)
+[0622/162002.582:INFO:CONSOLE(1)] "Uncaught (in promise) TypeError: Failed to execute 'put' on 'Cache': Partial response (status code 206) is unsupported", source: https://web.whatsapp.com/serviceworker.js (1)
+[0622/162114.599:INFO:CONSOLE(7)] "Another connection wants to delete database 'wawc_db_enc'. Closing db now to resume the delete request.", source: https://web.whatsapp.com/vendor1~bootstrap_qr.010e0b1e6789f30ac249.js (7)
+[0622/162114.606:INFO:CONSOLE(1)] "Another connection wants to delete database 'wawc_db_enc'. Closing db now to resume the delete request.", source: https://web.whatsapp.com/index.769dfab80a2250469711.worker.js (1)
+[0622/162116.339:INFO:CONSOLE(1)] "Another connection wants to delete database 'model-storage'. Closing db now to resume the delete request.", source: https://web.whatsapp.com/index.769dfab80a2250469711.worker.js (1)
+[0622/162116.407:INFO:CONSOLE(1)] "Another connection wants to delete database 'fts-storage'. Closing db now to resume the delete request.", source: https://web.whatsapp.com/index.769dfab80a2250469711.worker.js (1)
+[0622/162116.682:INFO:CONSOLE(7)] "Dexie.delete('model-storage') was blocked", source: https://web.whatsapp.com/vendor1~bootstrap_qr.010e0b1e6789f30ac249.js (7)
+[0622/162120.902:ERROR:dxva_video_decode_accelerator_win.cc(1427)] DXVAVDA fatal error: Could not load mf.dll: The specified module could not be found. (0x7E)
+[0622/162120.902:ERROR:dxva_video_decode_accelerator_win.cc(1427)] DXVAVDA fatal error: Could not load mf.dll: The specified module could not be found. (0x7E)
+[0622/162121.662:ERROR:cache_util_win.cc(20)] Unable to move the cache: Access is denied. (0x5)
+[0622/162121.662:ERROR:cache_util.cc(146)] Unable to move cache folder D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\GPUCache to D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\old_GPUCache_000
+[0622/162121.662:ERROR:disk_cache.cc(186)] Unable to create cache
+[0622/162121.662:ERROR:shader_disk_cache.cc(612)] Shader Cache Creation failed: -2
+[0622/162121.665:ERROR:cache_util_win.cc(20)] Unable to move the cache: Access is denied. (0x5)
+[0622/162121.665:ERROR:cache_util.cc(146)] Unable to move cache folder D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\GPUCache to D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\old_GPUCache_000
+[0622/162121.665:ERROR:disk_cache.cc(186)] Unable to create cache
+[0622/162121.665:ERROR:shader_disk_cache.cc(612)] Shader Cache Creation failed: -2
+[0622/162121.775:ERROR:command_buffer_proxy_impl.cc(125)] ContextResult::kTransientFailure: Failed to send GpuControl.CreateCommandBuffer.
+[0622/162121.783:ERROR:command_buffer_proxy_impl.cc(125)] ContextResult::kTransientFailure: Failed to send GpuControl.CreateCommandBuffer.
+[0622/162121.906:ERROR:database.cc(1782)] Cookie SQLite error: code 5 errno 33: database is locked sql: PRAGMA auto_vacuum
+[0622/162121.938:ERROR:database.cc(1782)] Cookie SQLite error: code 5 errno 33: database is locked sql: PRAGMA journal_mode=TRUNCATE
+[0622/162121.970:ERROR:database.cc(1782)] Cookie SQLite error: code 5 errno 33: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0622/162122.002:ERROR:database.cc(1782)] Cookie SQLite error: code 5 errno 33: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0622/162122.066:ERROR:database.cc(1782)] Cookie SQLite error: code 5 errno 33: database is locked sql: CREATE TABLE meta(key LONGVARCHAR NOT NULL UNIQUE PRIMARY KEY, value LONGVARCHAR)
+[0622/162122.193:ERROR:database.cc(1782)] Cookie SQLite error: code 5 errno 33: database is locked sql: PRAGMA auto_vacuum
+[0622/162122.219:ERROR:database.cc(1782)] Cookie SQLite error: code 5 errno 33: database is locked sql: PRAGMA journal_mode=TRUNCATE
+[0622/162122.258:ERROR:database.cc(1782)] Cookie SQLite error: code 5 errno 33: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0622/162122.283:ERROR:database.cc(1782)] Cookie SQLite error: code 5 errno 33: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0622/162122.347:ERROR:database.cc(1782)] Cookie SQLite error: code 5 errno 33: database is locked sql: CREATE TABLE meta(key LONGVARCHAR NOT NULL UNIQUE PRIMARY KEY, value LONGVARCHAR)
+[0622/162122.936:ERROR:cache_util_win.cc(20)] Unable to move the cache: Access is denied. (0x5)
+[0622/162122.936:ERROR:cache_util.cc(146)] Unable to move cache folder D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\Cache\Cache_Data to D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\Cache\old_Cache_Data_000
+[0622/162122.936:ERROR:disk_cache.cc(186)] Unable to create cache
+[0622/162128.462:ERROR:database.cc(1782)] Quota SQLite error: code 5 errno 33: database is locked sql: PRAGMA auto_vacuum
+[0622/162128.493:ERROR:database.cc(1782)] Quota SQLite error: code 5 errno 33: database is locked sql: PRAGMA journal_mode=TRUNCATE
+[0622/162129.888:ERROR:database.cc(1782)] Quota SQLite error: code 5 errno 33: database is locked sql: PRAGMA cache_size=500
+[0622/162129.927:ERROR:database.cc(1782)] Quota SQLite error: code 5 errno 33: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0622/162129.957:ERROR:database.cc(1782)] Quota SQLite error: code 5 errno 33: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0622/162129.981:ERROR:database.cc(1782)] Quota SQLite error: code 5 errno 33: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0622/162130.001:ERROR:database.cc(1782)] Quota SQLite error: code 5 errno 33: database is locked sql: CREATE TABLE meta(key LONGVARCHAR NOT NULL UNIQUE PRIMARY KEY, value LONGVARCHAR)
+[0622/162130.001:ERROR:quota_database.cc(768)] Could not open the quota database, resetting.
+[0622/162133.027:ERROR:quota_database.cc(770)] Failed to reset the quota database.
+[0622/162133.042:ERROR:database.cc(1782)] DatabaseTracker SQLite error: code 5 errno 33: database is locked sql: PRAGMA auto_vacuum
+[0622/162133.046:ERROR:database.cc(1782)] DatabaseTracker SQLite error: code 5 errno 33: database is locked sql: PRAGMA journal_mode=TRUNCATE
+[0622/162134.170:ERROR:database.cc(1782)] DatabaseTracker SQLite error: code 5 errno 33: database is locked sql: PRAGMA cache_size=500
+[0622/162134.174:ERROR:database.cc(1782)] DatabaseTracker SQLite error: code 5 errno 33: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0622/162134.178:ERROR:database.cc(1782)] DatabaseTracker SQLite error: code 5 errno 33: database is locked sql: SELECT 1 FROM sqlite_schema WHERE type=? AND name=?
+[0622/162139.589:ERROR:sandbox_origin_database.cc(190)] SandboxOriginDatabase failed at: Init@storage/browser/file_system/sandbox_origin_database.cc:94 with error: IO error: D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\File System\Origins/MANIFEST-000001: Unable to create sequential file (ChromeMethodBFE: 7::NewSequentialFile::4)
+[0622/162139.589:WARNING:sandbox_origin_database.cc(106)] Attempting to repair SandboxOriginDatabase.
+[0622/162140.451:ERROR:sandbox_origin_database.cc(190)] SandboxOriginDatabase failed at: Init@storage/browser/file_system/sandbox_origin_database.cc:94 with error: IO error: D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\File System\Origins/LOCK: File currently in use. (ChromeMethodBFE: 15::LockFile::2)
+[0622/162140.451:WARNING:sandbox_origin_database.cc(106)] Attempting to repair SandboxOriginDatabase.
+[0622/162141.549:ERROR:sandbox_origin_database.cc(190)] SandboxOriginDatabase failed at: Init@storage/browser/file_system/sandbox_origin_database.cc:94 with error: IO error: D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\File System\Origins/LOCK: File currently in use. (ChromeMethodBFE: 15::LockFile::2)
+[0622/162141.549:WARNING:sandbox_origin_database.cc(140)] Failed to repair SandboxOriginDatabase.
+[0622/162141.752:WARNING:sandbox_origin_database.cc(113)] Repairing SandboxOriginDatabase completed.
+[0622/162142.574:ERROR:sandbox_origin_database.cc(190)] SandboxOriginDatabase failed at: Init@storage/browser/file_system/sandbox_origin_database.cc:94 with error: IO error: D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\File System\Origins/LOCK: File currently in use. (ChromeMethodBFE: 15::LockFile::2)
+[0622/162144.595:ERROR:sandbox_origin_database.cc(190)] SandboxOriginDatabase failed at: Init@storage/browser/file_system/sandbox_origin_database.cc:94 with error: IO error: D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\File System\Origins/LOCK: File currently in use. (ChromeMethodBFE: 15::LockFile::2)
+[0622/162144.595:WARNING:sandbox_origin_database.cc(106)] Attempting to repair SandboxOriginDatabase.
+[0622/162149.816:ERROR:sandbox_origin_database.cc(190)] SandboxOriginDatabase failed at: Init@storage/browser/file_system/sandbox_origin_database.cc:94 with error: IO error: D:\PROJECT-APP\DESKTOP\WAPI\WAPI\bin\Debug\net6.0-windows\api-wa-v2\.wwebjs_auth\session\Default\File System\Origins/LOCK: File currently in use. (ChromeMethodBFE: 15::LockFile::2)
+[0622/162149.816:WARNING:sandbox_origin_database.cc(140)] Failed to repair SandboxOriginDatabase.
+[0622/162149.869:INFO:CONSOLE(0)] "Uncaught (in promise) AbortError: Failed to register a ServiceWorker for scope ('https://web.whatsapp.com/') with script ('https://web.whatsapp.com/serviceworker.js'): Operation has been aborted", source: https://web.whatsapp.com/ (0)
+[0622/162221.451:INFO:CONSOLE(0)] "Clear-Site-Data header on 'https://web.whatsapp.com/?post_logout=1&logout_reason=0': Cleared data types: "storage".", source: https://web.whatsapp.com/ (0)
+[0622/162223.178:ERROR:entry_impl.cc(1076)] No file for 80000006
+[0622/162223.178:ERROR:entry_impl.cc(1076)] No file for 80000007
+[0622/162223.179:ERROR:entry_impl.cc(1076)] No file for 80000009
+[0622/162224.130:ERROR:entry_impl.cc(1076)] No file for 80000008
+[0622/162224.705:INFO:CONSOLE(0)] "Uncaught (in promise) AbortError: Failed to register a ServiceWorker for scope ('https://web.whatsapp.com/') with script ('https://web.whatsapp.com/serviceworker.js'): Operation has been aborted", source: https://web.whatsapp.com/ (0)
+[0622/162224.710:ERROR:entry_impl.cc(1076)] No file for 8000000a

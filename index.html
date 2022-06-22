@@ -22,13 +22,13 @@
     }
 
     .bg-green {
-        background: #008069;
+        background: #0db597;
         height: 30vh;
     }
 
     .bg-grey {
         height: 70vh;
-        background-color: #bebfc0;
+        background-color: #f9f9f9;
     }
 
     .content {
@@ -111,14 +111,11 @@
                 <li>Tunggu hingga muncul tulisan "Ready" </li>
 
             </ol>
-            <a href="#" class="btn-logout">
-                Logout
-            </a>
         </div>
         <div class="img">
-            <img src="#" id="qrcode" class="d-n" width="100%">
+            <img src="#" id="qrcode" class="" width="100%" style="display:none">
             <div class="c-log">
-                <div class="log"></div>
+                <div class="log">Connecting ... </div>
             </div>
         </div>
     </div>
@@ -134,7 +131,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(document).ready(function () {
-            var socket = io();
+            
+            var socket = io("http://localhost:8000/",{path:'/socket.io'});
             socket.on("message", function (msg) {
                 console.log(msg);
                 $(".log").text(msg);
@@ -142,7 +140,7 @@
 
             socket.on("qr", function (src) {
                 $("#qrcode").attr('src', src);
-                $("#qrcode").removeClass('d-n');
+                $("#qrcode").show();
                 $(".c-log").hide();
             });
             socket.on("ready", function (msg) {
@@ -152,6 +150,9 @@
             });
             socket.on("authenticated", function (src) {
                 $("#qrcode").hide();
+            });
+            socket.on("disconnected", function (src) {
+                $("#qrcode").show();
             });
         });
     </script>
