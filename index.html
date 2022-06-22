@@ -149,14 +149,10 @@
                 $("#qrcode").hide();
                 $(".c-log").show();
                 $(".log").text("Ready");
-
-
             });
             socket.on("authenticated", function (src) {
                 $("#qrcode").hide();
             });
-            
-
         });
     </script>
 
