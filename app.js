@@ -195,6 +195,7 @@ io.on('connection', function (socket) {
         console.log("Status Auth :  " + login);
         socket.emit('message', 'Whatsapp is disconnected!');
         saveAuth("0");
+        pusher()
         client.destroy();
         client.on('qr', (qr) => {
             console.log('QR RECEIVED', qr);
