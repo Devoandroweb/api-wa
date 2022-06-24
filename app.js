@@ -54,6 +54,8 @@ client.on('ready', () => {
     login = true;
     console.log("Status Auth :  "+login);
     console.log('Client is ready!');
+
+
 });
 
 client.on('message', message => {
@@ -134,6 +136,21 @@ app.get('/send-message', (req, res) => {
         })
     });
 });
+app.get('/check-auth', (req, res) => {
+    var auth = 0;
+    fs.readFile('auth.txt', 'utf8', function (err, data) {
+        // Display the file content
+        if(data == "1"){
+            auth = client.info;
+        }
+        res.status(200).json({
+            status: true,
+            response: auth
+        });
+    });
+
+    
+});
 // -----------------------------------------------------------------------------------------
 
 // IO --------------------------------------------------------------------------------------
@@ -155,9 +172,12 @@ io.on('connection', function (socket) {
 
     client.on('ready', () => {
         login = true;
+        saveAuth("1");
         console.log("Status Auth :  "+login);
         socket.emit('ready', 'Whatsapp is ready!');
         socket.emit('message', 'Whatsapp is ready!');
+        pusher(client.info);
+
     });
 
     client.on('authenticated', () => {
@@ -174,6 +194,7 @@ io.on('connection', function (socket) {
         login = false;
         console.log("Status Auth :  " + login);
         socket.emit('message', 'Whatsapp is disconnected!');
+        saveAuth("0");
         client.destroy();
         client.on('qr', (qr) => {
             console.log('QR RECEIVED', qr);
@@ -192,3 +213,33 @@ server.listen(port, function () {
     client.initialize();
     console.log("App running ... ");
 });
+
+
+
+function pusher(info = null){
+    console.log(info);
+    // Enable pusher logging - don't include this in production
+    
+    var Pusher = require("pusher");
+    
+    var pusher = new Pusher({
+        appId: "1427451",
+        key: "58eafcd4dda22b156f9f",
+        secret: "4db0ea9e6d8b330032f0",
+        cluster: "ap1",
+    });
+    
+    Pusher.logToConsole = true;
+
+    pusher.trigger("my-channel", "my-event",info);
+}
+function saveAuth(text){
+    const fs = require('fs');
+
+    fs.writeFile("./auth.txt", String(text), function (err) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("The file was saved!");
+    });
+}

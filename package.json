@@ -3,6 +3,7 @@
     "express": "^4.17.2",
     "http": "^0.0.1-security",
     "nodemon": "^2.0.15",
+    "pusher": "^5.1.0-beta",
     "qrcode": "^1.5.0",
     "qrcode-terminal": "^0.12.0",
     "rimraf": "^3.0.2",
